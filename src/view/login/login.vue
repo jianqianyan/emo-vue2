@@ -6,7 +6,7 @@
                 <el-input placeholder="电话" v-model="phone"></el-input>
             </div>
             <div class="password-box">
-                <el-input placeholder="密码" v-model="password"></el-input>
+                <el-input placeholder="密码" v-model="password" show-password></el-input>
             </div>
             <div class="VerCode">
                 <div class="VerCode-img">
@@ -14,8 +14,12 @@
                 </div>
                 <div class="VerCode-input"><el-input placeholder="验证码" v-model="img_code"></el-input></div>
             </div>
+            
             <div class="loginButton">
                 <el-button style="width: 100%" @click="login()">登录</el-button>
+            </div>
+            <div class="register-box">
+                <p @click="turn_register()">注册</p>
             </div>
             <div v-if = "loginstate">
                 {{loginMessage}}
@@ -39,14 +43,17 @@ export default {
     },
     methods: {
         login(){
+            this.loginstate = 1;
+            if(!this.phone || !this.password || !this.img_code){
+                this.loginMessage = "账号密码或验证码不能为空";
+                return;
+            }
             let Parmas = {phone: this.phone , password : this.password , img_code: this.img_code};
             this.$axios({
                 url: "/login",
                 params: Parmas,
             }).then(res => {
                 let message = res.data;
-                console.log(res);
-                this.loginstate = 1;
                 if(message.data == -1){
                     this.loginMessage = "账号不存在";
                 }
@@ -70,6 +77,11 @@ export default {
         },
         replace_img(){
             this.$refs.img_codeRefs.src = "http://localhost:3000/login/img_code?time=" + new Date();
+        },
+        turn_register(){
+            this.$router.push({
+                path: "/register",
+            })
         }
 
     }
@@ -85,7 +97,7 @@ export default {
 .login-body{
     text-align: center;
     width: 280px;
-    height: 350px;
+    height: 310px;
     /* background-color: red; */
     padding: 10px 10px 10px 10px;
     position: absolute;
@@ -109,5 +121,17 @@ export default {
 .VerCode-input{
     float: left;
     width: 60%;
+}
+.register-box{
+    float: left;
+    width: 100%;
+    height: 30px;
+   
+}
+.register-box p{
+    float: right;
+    font-size: 10px;
+    margin-right: 10px;
+    color: #95a5a6;
 }
 </style>
