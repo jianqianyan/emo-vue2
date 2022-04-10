@@ -46,7 +46,7 @@
         {{ registerMessage }}
       </div>
       <div class="login-box">
-          <p @click="turn_login()">登录</p>
+        <p @click="turn_login()">登录</p>
       </div>
     </div>
   </div>
@@ -71,12 +71,23 @@ export default {
       this.registerstate = 1;
       if (!this.phone || !this.password || !this.img_code || !this.email) {
         this.registerMessage = "账号密码邮箱或验证码不能为空";
+        return;
       }
       if (this.password != this.conpassword) {
         this.registerMessage = "两次密码不相同";
+        return;
       }
       // 这里加上注册限制
-      //
+      //手机号格式判断
+      if (this.phone.search(/^1[3578][0-9]{9}$/) == -1) {
+        this.registerMessage = "手机号格式错误";
+        return;
+      }
+      // 邮箱号格式判断
+      if(this.email.search(/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/) == -1){
+        this.registerMessage = "邮箱格式错误";
+        return;
+      }
       let Parmas = {
         phone: this.phone,
         password: this.password,
@@ -85,7 +96,7 @@ export default {
       };
       this.$axios({
         url: "/login/register",
-        method: 'post',
+        method: "post",
         params: Parmas,
       })
         .then((res) => {
@@ -108,11 +119,11 @@ export default {
       this.$refs.img_codeRefs.src =
         "http://localhost:3000/login/img_code?time=" + new Date();
     },
-    turn_login(){
-        this.$router.push({
-            path: "/"
-        })
-    }
+    turn_login() {
+      this.$router.push({
+        path: "/",
+      });
+    },
   },
 };
 </script>
@@ -146,13 +157,12 @@ export default {
   float: left;
   width: 60%;
 }
-.login-box{
-    
+.login-box {
 }
-.login-box p{
-    float: right;
-    font-size: 10px;
-    margin-right: 10px;
-    color: #95a5a6;
+.login-box p {
+  float: right;
+  font-size: 10px;
+  margin-right: 10px;
+  color: #95a5a6;
 }
 </style>
