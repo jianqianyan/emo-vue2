@@ -9,7 +9,11 @@ Vue.use(Router)
 const routes =  [
   {
     path: '/',
-    name: 'login',
+    redirect: "/login"
+  },
+  {
+    path: "/login",
+    name: "login",
     component: login
   },
   {
@@ -28,5 +32,12 @@ export default router;
 
 
 router.beforeEach((to, from, next) => {
-  next();
+  if(to.path == "/login" || router.app.$store.state.User != "" || to.path == "/register"){
+    console.log("ok");
+    next();
+  }
+  else{
+    alert("请先进行登录");
+    next("/login");
+  }
 });
