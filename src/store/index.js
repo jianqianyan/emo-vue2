@@ -8,7 +8,7 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
-    User: "",
+    User: "qianyan",
   },
   mutations,
   actions,

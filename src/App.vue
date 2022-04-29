@@ -16,4 +16,8 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+html body{
+  margin: 0px;
+  padding:0px;
+}
 </style>

@@ -1,3 +1,4 @@
+// 注册界面
 <template>
   <div class="register">
     <div class="register-body">

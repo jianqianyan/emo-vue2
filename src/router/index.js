@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 const login = () => import("../view/login/login.vue")
 const register = () => import("../view/register/register.vue")
+const index = () => import("../view/index/index.vue")
+const theVideo = () => import("../view/theVideo/theVideo.vue")
 
 Vue.use(Router)
 
@@ -20,6 +22,15 @@ const routes =  [
     path: '/register',
     name: 'register',
     component: register
+  },
+  {
+    path: '/index',
+    name: 'index',
+    component: index
+  },{
+    path: '/theVideo',
+    name: 'theVideo',
+    component: theVideo
   }
 ]
 
