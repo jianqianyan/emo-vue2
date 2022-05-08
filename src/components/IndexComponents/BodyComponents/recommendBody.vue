@@ -1,3 +1,4 @@
+// 推荐视频
 <template>
   <div class="recommend-body">
     <div
@@ -5,7 +6,7 @@
       :key="index"
       class="video-box"
     >
-    <video-box></video-box>
+    <video-box videoId="1"></video-box>
     </div>
   </div>
 </template>
@@ -35,18 +36,8 @@ export default {
         {
           name: "aaa",
         },
-        {
-          name: "aaa",
-        },
-        {
-          name: "aaa",
-        },
-        {
-          name: "aaa",
-        },
-        {
-          name: "aaa",
-        },
+        
+        
       ],
     };
   },
@@ -58,9 +49,9 @@ export default {
 
 <style scoped>
 .recommend-body {
-  width: 94%;
-  margin-left: 3%;
-  margin-right: 3%;
+  width: 100%;
+  /* margin-left: 3%;
+  margin-right: 3%; */
   float: left;
   /* padding-bottom: 10px;
   padding-right: 10px; */

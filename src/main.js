@@ -9,10 +9,8 @@ Vue.use(ElementUI);
 Vue.config.productionTip = false
 
 // 引入axios
-import axios from 'axios'
-Vue.prototype.$axios = axios
-axios.defaults.baseURL = "http://localhost:3000";
-axios.defaults.withCredentials=true;
+import _axios from './until/_axios'
+Vue.prototype.$axios = _axios
 
 // 引入vuex
 import Vuex from "vuex";

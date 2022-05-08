@@ -18,5 +18,8 @@ export default {
 .my-header{
     height: 150px;
     /* background: red; */
+    width: 100%;
+    /* background: url("../../assets/background/97631195_p16.png"); */
+    background-size: 600px 300px;
 }
 </style>

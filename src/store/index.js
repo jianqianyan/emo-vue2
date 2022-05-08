@@ -9,6 +9,9 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
   state: {
     User: "qianyan",
+    video_base: "http://localhost:3000/video",
+    image_base: "http://localhost:3000/image",
+    photo_base: "http://localhost:3000/user_photo"
   },
   mutations,
   actions,

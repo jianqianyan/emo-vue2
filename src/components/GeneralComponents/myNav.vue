@@ -33,12 +33,14 @@ export default {
 .my-nav {
   height: 40px;
   width: 100%;
+  
   display: flex;
 }
 .left-box {
   /* background-color: red; */
   height: 40px;
-  width: 440px;
+  width: 420px;
+  margin-left: 20px;
 }
 .center-box {
   height: 40px;
@@ -47,7 +49,8 @@ export default {
 }
 .right-box {
   /* background: blue; */
-  width: 500px;
+  width: 480px;
+  margin-right: 20px;
   height: 40px;
 }
 </style>

@@ -16,7 +16,7 @@
       <div class="VerCode">
         <div class="VerCode-img">
           <img
-            src="http://localhost:3000/login/img_code"
+            src="http://localhost:3000/img_code"
             alt=""
             ref="img_codeRefs"
             @click="replace_img()"
@@ -66,21 +66,16 @@ export default {
       };
       this.$axios({
         url: "/login",
-        params: Parmas,
+        data: Parmas,
+        method: "POST",
       })
         .then((res) => {
           let message = res.data;
-          if (message.data == -1) {
-            this.login_message = "账号不存在";
-          } else if (message.data == -2) {
-            this.login_message = "密码错误";
-          } else if (message.data == -3) {
-            this.login_message = "登录失败";
-          } else if (message.data == -4) {
-            this.login_message = "验证码错误";
+          if (message.state == -1) {
+            this.login_message = message.data.cause;
           } else {
             this.login_message = "登录成功";
-            localStorage.setItem("token", message.token);
+            localStorage.setItem("token", message.data.token);
             setTimeout(() => {
               this.$router.push({
                 path: "/index",
@@ -94,7 +89,7 @@ export default {
     },
     replace_img() {
       this.$refs.img_codeRefs.src =
-        "http://localhost:3000/login/img_code?time=" + new Date();
+        "http://localhost:3000/img_code?time=" + new Date();
     },
     turn_register() {
       this.$router.push({

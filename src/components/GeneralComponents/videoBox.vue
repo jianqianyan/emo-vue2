@@ -1,13 +1,14 @@
+// 视频盒子
 <template>
-  <div class="video-box" @click="seeVideo(img_message)">
+  <div class="video-box-body" @click="seeVideo(message)">
     <div class="video-cover">
-      <img :src="img_message.img_cover" alt="" />
+      <img :src="message.cover" alt="" />
     </div>
     <div class="video-name">
-      {{ img_message.img_name }}
+      {{ message.name }}
     </div>
     <div class="video-author">
-      {{ img_message.img_author }}
+      {{ message.up_name }}
     </div>
   </div>
 </template>
@@ -16,26 +17,29 @@
 export default {
   name: "videoBox",
   props: {
-    videoUrl: {
+    videoId: {
       type: String,
     },
   },
   data() {
     return {
-      img_message: {},
+      message: {
+        cover: "",
+      },
     };
   },
   created() {
-    this.getMessage(this.videoUrl);
+    this.getMessage(this.videoId);
   },
   methods: {
     // 获取与视频有关信息
     getMessage(url) {
       this.$axios({
-        url: url
+        url: "/getVideo?id=" + url,
       })
         .then((res) => {
-          this.img_message = res.data;
+          this.message = res.data.data.message;
+          this.message.cover = this.$store.state.image_base + this.message.cover;
         })
         .catch((err) => {
           console.log(err);
@@ -45,7 +49,7 @@ export default {
     seeVideo(message){
       // message = {name: "aaa"};
       this.$router.push({
-        path: "/video",
+        path: "/theVideo",
         query: message
       })
     }
@@ -53,7 +57,7 @@ export default {
 };
 </script>
 <style scoped>
-.video-box{
+.video-box-body-body{
   width: 100%;
   height: 160px;
   /* background-color: red; */
@@ -61,19 +65,25 @@ export default {
 }
 .video-cover{
   width: 100%;
-  height: 100px;
+  height: 130px;
   /* background-color: red; */
   /* float: left; */
 }
+.video-cover img{
+  width: 100%;
+  height: 130px;
+}
 .video-name{
   width: 100%;
-  height: 40px;
+  height: 18px;
+  font-size: 13px;
   /* background: blue; */
   /* float: left; */
 }
 .video-author{
   width: 100%;
-  height: 20px;
+  height: 10px;
+  font-size: 10px;
   /* background-color: orange; */
   /* float: left; */
 }

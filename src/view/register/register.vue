@@ -30,7 +30,7 @@
       <div class="VerCode">
         <div class="VerCode-img">
           <img
-            src="http://localhost:3000/login/img_code"
+            src="http://localhost:3000/img_code"
             alt=""
             ref="img_codeRefs"
             @click="replace_img()"
@@ -85,7 +85,11 @@ export default {
         return;
       }
       // 邮箱号格式判断
-      if(this.email.search(/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/) == -1){
+      if (
+        this.email.search(
+          /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
+        ) == -1
+      ) {
         this.registerMessage = "邮箱格式错误";
         return;
       }
@@ -98,18 +102,15 @@ export default {
       this.$axios({
         url: "/login/register",
         method: "post",
-        params: Parmas,
+        data: Parmas,
       })
         .then((res) => {
           let message = res.data;
-          if (message.data == 1) {
+          console.log(message);
+          if (message.state == 200) {
             this.registerMessage = "注册成功";
-          } else if (message.data == -1) {
-            this.registerMessage = "该手机号已被注册";
-          } else if (message.data == -3) {
-            this.registerMessage = "注册失败";
-          } else if (message.data == -4) {
-            this.registerMessage = "验证码错误";
+          } else {
+            this.registerMessage = message.data.cause;
           }
         })
         .catch((err) => {
@@ -118,7 +119,7 @@ export default {
     },
     replace_img() {
       this.$refs.img_codeRefs.src =
-        "http://localhost:3000/login/img_code?time=" + new Date();
+        "http://localhost:3000/img_code?time=" + new Date();
     },
     turn_login() {
       this.$router.push({
