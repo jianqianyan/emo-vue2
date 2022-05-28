@@ -5,11 +5,16 @@ const register = () => import("../view/register/register.vue")
 const index = () => import("../view/index/index.vue")
 const theVideo = () => import("../view/theVideo/theVideo.vue")
 
+// Resolve duplicate routing
+const originalPush = Router.prototype.push;
+Router.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err);
+}
+
 Vue.use(Router)
 
 
-const routes =  [
-  {
+const routes = [{
     path: '/',
     redirect: "/login"
   },
@@ -27,10 +32,18 @@ const routes =  [
     path: '/index',
     name: 'index',
     component: index
-  },{
+  }, {
     path: '/theVideo',
     name: 'theVideo',
     component: theVideo
+  }, {
+    path: "/contribution",
+    name: 'contribution',
+    component: () => import("../view/contribution/contribution.vue")
+  },{
+    path: "/center",
+    name: "center",
+    component: () => import("../view/center/center.vue")
   }
 ]
 
@@ -43,11 +56,9 @@ export default router;
 
 
 router.beforeEach((to, from, next) => {
-  if(to.path == "/login" || router.app.$store.state.User != "" || to.path == "/register"){
-    console.log("ok");
+  if (to.path == "/login" || router.app.$store.state.User != "" || to.path == "/register") {
     next();
-  }
-  else{
+  } else {
     alert("请先进行登录");
     next("/login");
   }

@@ -11,6 +11,7 @@ export default {
 </script>
 
 <style>
+@import url("./style/root.css");
 #app {
   font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, Helvetica,
     Arial, PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif;
@@ -19,4 +20,5 @@ html body {
   margin: 0px;
   padding: 0px;
 }
+
 </style>

@@ -9,15 +9,15 @@
       <index-carousel></index-carousel>
     </div>
     <div class="recommend">
-      <recommend-body></recommend-body>
+      <recommend-body :recommendMessage="recommendMessage"></recommend-body>
     </div>
     <hr />
     <div class="hot-video">
-      <hot-video></hot-video>
+      <hot-video :hotMessage="hotMessage"></hot-video>
     </div>
     <hr />
-    <div class="advertisement"> 
-        <p>广告位招租</p>
+    <div class="advertisement">
+      <p>广告位招租</p>
     </div>
   </div>
 </template>
@@ -34,6 +34,26 @@ export default {
     recommendBody,
     indexCarousel,
     hotVideo,
+  },
+  props: {
+    videoMessage: {
+      type: Array,
+    },
+  },
+  data() {
+    return {
+      recommendMessage: [],
+      hotMessage: [],
+    };
+  },
+  created() {
+    for (let i = 0; i < this.videoMessage.length; ++i) {
+      if (i < 6) {
+        this.recommendMessage.push(this.videoMessage[i]);
+      } else {
+        this.hotMessage.push(this.videoMessage[i]);
+      }
+    }
   },
 };
 </script>
@@ -60,10 +80,10 @@ export default {
   height: 180px;
   float: left;
 }
-.advertisement{
-    float: left;
-    width: 100%;
-    height: 200px;
-    text-align: center;
+.advertisement {
+  float: left;
+  width: 100%;
+  height: 200px;
+  text-align: center;
 }
 </style>

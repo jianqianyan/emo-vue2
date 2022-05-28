@@ -2,7 +2,7 @@
 <template>
   <div class="hot-video-body">
     <div class="hot-son" v-for="(item, index) in videoList" :key="index">
-      <video-box videoId="1"></video-box>
+      <video-box :videoId="item.id"></video-box>
     </div>
   </div>
 </template>
@@ -40,6 +40,14 @@ export default {
   components: {
     videoBox,
   },
+  props: {
+    hotMessage: {
+      type: Array,
+    }
+  },
+  created(){
+    this.videoList = this.hotMessage;
+  }
 };
 </script>
 

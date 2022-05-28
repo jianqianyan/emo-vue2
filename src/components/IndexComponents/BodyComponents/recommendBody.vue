@@ -1,18 +1,14 @@
 // 推荐视频
 <template>
   <div class="recommend-body">
-    <div
-      v-for="(item, index) in videoList"
-      :key="index"
-      class="video-box"
-    >
-    <video-box videoId="1"></video-box>
+    <div v-for="(item, index) in videoList" :key="index" class="video-box">
+      <video-box :videoId="item.id"></video-box>
     </div>
   </div>
 </template>
 
 <script>
-import videoBox from "../../GeneralComponents/videoBox.vue"
+import videoBox from "../../GeneralComponents/videoBox.vue";
 export default {
   name: "recommendBody",
   data() {
@@ -36,13 +32,19 @@ export default {
         {
           name: "aaa",
         },
-        
-        
       ],
     };
   },
-  components:{
+  components: {
     videoBox,
+  },
+  props: {
+    recommendMessage: {
+      type: Array,
+    }
+  },
+  created(){
+    this.videoList = this.recommendMessage;
   }
 };
 </script>
@@ -65,7 +67,7 @@ export default {
   margin-bottom: 10px;
 
   border-style: solid;
-  border-width: 1px;;
-  border-radius: 8  px;
+  border-width: 1px;
+  border-radius: 8 px;
 }
 </style>

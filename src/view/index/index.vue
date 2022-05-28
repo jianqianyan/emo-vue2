@@ -3,7 +3,7 @@
     <div class="index">
         <my-header></my-header>
         <hr>
-        <index-body></index-body>
+        <index-body :videoMessage="videoMessage"></index-body>
         <hr>
         <the-footer></the-footer>
     </div>
@@ -19,6 +19,13 @@ export default {
         myHeader,
         indexBody,
         theFooter
+    },
+    created(){
+    },
+    data(){
+        return {
+            videoMessage: this.$store.state.video_message,
+        }
     }
 }
 </script>

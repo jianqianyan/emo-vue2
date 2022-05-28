@@ -18,7 +18,7 @@ export default {
   name: "videoBox",
   props: {
     videoId: {
-      type: String,
+      type: Number,
     },
   },
   data() {

@@ -1,6 +1,6 @@
 <template>
   <div class="left-nav">
-    <div v-for="(item, index) in navList" :key="index" class="nav-son">
+    <div v-for="(item, index) in navList" :key="index" class="nav-son" @click="turnTo(item.link)">
       <p>{{ item.name }}</p>
     </div>
   </div>
@@ -14,39 +14,18 @@ export default {
       navList: [
         {
           name: "主站",
-          link: "",
-        },
-        {
-          name: "番剧",
-          link: "",
-        },
-        {
-          name: "游戏中心",
-          link: "",
-        },
-        {
-          name: "直播",
-          link: "",
-        },
-        {
-          name: "会员购",
-          link: "",
-        },
-        {
-          name: "漫画",
-          link: "",
-        },
-        {
-          name: "赛事",
-          link: "",
-        },
-        {
-          name: "下载app",
-          link: "",
-        },
+          link: "/index",
+        }
       ],
     };
   },
+  methods: {
+    turnTo(link){
+      this.$router.push({
+        path: link
+      })
+    },
+  }
 };
 </script>
 
@@ -64,5 +43,6 @@ export default {
   float: left;
   font-size: 13px;
   flex: 1;
+  max-width: 60px;
 }
 </style>
