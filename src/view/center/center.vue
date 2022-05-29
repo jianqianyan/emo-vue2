@@ -20,11 +20,17 @@ export default {
   data(){
     return {
       message : {
-        name: "name",
-        information: "information",
+        name: this.$store.state.user_name,
+        information: this.user_information,
+        id: this.$store.state.user_id,
         path: "http://localhost:3000/user_photo/1.jpg"
-      }
+      },
+      user_id : this.$store.state.user_id,
+      user: {},
     }
+  },
+  created(){    
+    
   }
 };
 </script>
