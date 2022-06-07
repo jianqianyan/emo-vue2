@@ -56,7 +56,7 @@ export default router;
 
 
 router.beforeEach((to, from, next) => {
-  if (to.path == "/login" || router.app.$store.state.User != "" || to.path == "/register") {
+  if (to.path == "/login" || router.app.$store.state.user_name != "" || to.path == "/register") {
     next();
   } else {
     alert("请先进行登录");

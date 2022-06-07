@@ -1,69 +1,74 @@
 <template>
   <div class="contribution">
     <my-nav></my-nav>
-    <div class="contri-header">投稿</div>
-    <div class="upvideo">
-      视频上传
-      <div class="up">
-        <div class="base-button up-video-button">
-          <span>上传视频</span>
+    <div class="contributon-body">
+      <div class="contri-header">投稿</div>
+      <div class="upvideo">
+        视频上传
+        <div class="up">
+          <div class="base-button up-video-button">
+            <span>上传视频</span>
+          </div>
         </div>
+        <input type="file" @change="postVideo($event)" />
+        <div v-if="isupVideo">已上传{{ progress }}</div>
       </div>
-      <input type="file" @change="postVideo($event)" />
-      <div v-if="isupVideo">已上传{{ progress }}</div>
-    </div>
-    <div class="upimg">
-      封面上传
-      <div class="up">
-        <div class="base-button up-video-button">
-          <span>上传图片</span>
+      <div class="upimg">
+        封面上传
+        <div class="up">
+          <div class="base-button up-video-button">
+            <span>上传图片</span>
+          </div>
         </div>
+        <input type="file" @change="postImg($event)" />
       </div>
-      <input type="file" @change="postImg($event)" />
-    </div>
-    <div class="title">
-      <div class="box-title">
-        <span>标题</span>
-      </div>
+      <div class="title">
+        <div class="box-title">
+          <span>标题</span>
+        </div>
 
-      <input type="text" v-model="videoMessage.name" class="base-input" />
-    </div>
-    <div class="information">
-      <div class="box-title"><span>简介</span></div>
-      <input
-        type="text"
-        v-model="videoMessage.information"
-        class="base-input inforation-input"
-      />
-    </div>
-    <div class="tag">
-      <div class="box-title"><span>tag</span></div>
+        <input type="text" v-model="videoMessage.name" class="base-input" />
+      </div>
+      <div class="information">
+        <div class="box-title"><span>简介</span></div>
+        <input
+          type="text"
+          v-model="videoMessage.information"
+          class="base-input inforation-input"
+        />
+      </div>
+      <div class="tag">
+        <div class="box-title"><span>tag</span></div>
 
-      <input type="text" v-model="atag" class="base-input tag-input" />
-      <button class="base-button tag-button" @click="addTag()">添加tag</button>
-      <div class="tags">
-        <div v-for="(item, index) in tags" :key="index" class="tag-son">
-          <span>{{ item }}</span>
-          <img
-            src="../../assets/logo/cha.png"
-            alt=""
-            @click="delectTag(index)"
-          />
+        <input type="text" v-model="atag" class="base-input tag-input" />
+        <button class="base-button tag-button" @click="addTag()">
+          添加tag
+        </button>
+        <div class="tags">
+          <div v-for="(item, index) in tags" :key="index" class="tag-son">
+            <span>{{ item }}</span>
+            <img
+              src="../../assets/logo/cha.png"
+              alt=""
+              @click="delectTag(index)"
+            />
+          </div>
         </div>
       </div>
+      <div class="type">
+        分区
+        <select name="" id="" v-model="videoMessage.type" class="base-select">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+      </div>
+      <div>
+        <button @click="contribution()" class="base-button">投稿</button>
+      </div>
     </div>
-    <div class="type">
-      分区
-      <select name="" id="" v-model="videoMessage.type" class="base-select">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-      </select>
-    </div>
-    <div>
-      <button @click="contribution()" class="base-button">投稿</button>
-    </div>
+
     <!-- {{ videoMessage }}
     {{ progress }} -->
   </div>
@@ -92,7 +97,7 @@ export default {
       tags: [],
       atag: "",
       isupVideo: 0,
-      isUpimg: 0
+      isUpimg: 0,
     };
   },
   components: {
@@ -173,11 +178,20 @@ export default {
         this.videoMessage.tag += "#" + this.tags[i];
       }
       this.$axios({
-        url: "/news",
+        url: "/contribution",
         method: "POST",
         data: this.videoMessage,
       })
         .then((res) => {
+          if(res.data.state == 200){
+            alert("投稿成功!");
+            this.$router.push({
+              path: "/index",
+            })
+          }
+          else{
+            alert(res.data.data.cause);
+          }
           console.log(res);
         })
         .catch((err) => {
@@ -198,6 +212,9 @@ export default {
 
 <style scoped>
 .contribution {
+  width: 100%;
+}
+.contributon-body {
   padding-left: 5%;
   width: 90%;
   padding-right: 5%;

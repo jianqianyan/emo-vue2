@@ -66,8 +66,6 @@ export default {
   margin-right: 10px;
   margin-bottom: 10px;
 
-  border-style: solid;
-  border-width: 1px;
   border-radius: 8 px;
 }
 </style>

@@ -28,6 +28,11 @@ export default {
       type: Object,
     },
   },
+  created(){
+    if(typeof this.message.information == "undefined"){
+      this.message.information = "未编辑简介";
+    }
+  }
 };
 </script>
 

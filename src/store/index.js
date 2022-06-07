@@ -8,13 +8,16 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
-    User: "qianyan",
-    user_id:"1",
-    user_name: "qianyan",
-    user_path: "http://localhost:3000/user_photo/1.jpg",
-    video_base: "http://localhost:3000/video",
-    image_base: "http://localhost:3000/image/",
-    photo_base: "http://localhost:3000/user_photo",
+    User: "",
+    user_id:"",
+    user_name: "",
+    user_information:"",
+    base_url: "http://81.68.212.237:3000",
+    user_base: "http://81.68.212.237:3000/user_photo",
+    user_path: "http://81.68.212.237:3000/user_photo/1.jpg",
+    video_base: "http://81.68.212.237:3000/video",
+    image_base: "http://81.68.212.237:3000/image/",
+    photo_base: "http://81.68.212.237:3000/user_photo",
     ver_base: "http://localhost:3000/img_code",
     video_message: [],
   },

@@ -39,7 +39,7 @@
       <div class="VerCode">
         <div class="VerCode-img">
           <img
-            src="http://localhost:3000/img_code"
+            :src="imgPath"
             alt=""
             ref="img_codeRefs"
             @click="replace_img()"
@@ -47,7 +47,7 @@
         </div>
         <div class="VerCode-input-box">
           <input
-            type="text"
+            type="text" 
             placeholder="验证码"
             v-model="img_code"
             class="base-input VerCode-input"
@@ -108,6 +108,10 @@ export default {
             this.login_message = message.data.cause;
           } else {
             this.login_message = "登录成功";
+            this.$store.state.user_id = message.data.message.id;
+            this.$store.state.user_name = message.data.message.name;
+            this.$store.state.user_path = message.data.message.img_path;
+            this.$store.state.user_information = message.data.message.information;
             localStorage.setItem("token", message.data.token);
             this.$axios({
               url: "/getIndex",
@@ -159,6 +163,11 @@ export default {
       }
     };
   },
+  computed:{
+    imgPath() {
+      return this.$store.state.ver_base;
+    }
+  }
 };
 </script>
 

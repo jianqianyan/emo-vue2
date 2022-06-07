@@ -61,7 +61,7 @@
       <div class="VerCode">
         <div class="VerCode-img">
           <img
-            src="http://localhost:3000/img_code"
+            :src="imgPath"
             alt=""
             ref="img_codeRefs"
             @click="replace_img()"
@@ -159,7 +159,7 @@ export default {
     },
     replace_img() {
       this.$refs.img_codeRefs.src =
-        "http://localhost:3000/img_code?time=" + new Date();
+        this.$store.state.ver_base + "?time=" + new Date();
     },
     turn_login() {
       this.$router.push({
@@ -167,6 +167,11 @@ export default {
       });
     },
   },
+  computed:{
+    imgPath() {
+      return this.$store.state.ver_base;
+    }
+  }
 };
 </script>
 

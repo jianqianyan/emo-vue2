@@ -8,7 +8,7 @@
       {{ message.name }}
     </div>
     <div class="video-author">
-      {{ message.up_name }}
+      <audio src=""></audio>  {{ message.up_name }}
     </div>
   </div>
 </template>
@@ -57,34 +57,30 @@ export default {
 };
 </script>
 <style scoped>
-.video-box-body-body{
-  width: 100%;
-  height: 160px;
-  /* background-color: red; */
-  /* float: left; */
+.video-box-body{
+  width: 250px;
+  height: 170px;
 }
 .video-cover{
   width: 100%;
   height: 130px;
-  /* background-color: red; */
-  /* float: left; */
 }
 .video-cover img{
   width: 100%;
   height: 130px;
+  border-radius: 8px;
+  overflow: hidden;
 }
 .video-name{
   width: 100%;
   height: 18px;
-  font-size: 13px;
-  /* background: blue; */
-  /* float: left; */
+  font-size: 14px;
+  margin-top:2px;
 }
 .video-author{
   width: 100%;
   height: 10px;
   font-size: 10px;
-  /* background-color: orange; */
-  /* float: left; */
+  color: var(--color1)
 }
 </style>
