@@ -3,7 +3,7 @@
     <my-nav></my-nav>
     <div class="center-body">
       <center-header :message="message"></center-header>
-      <center-video :videoList="videoList"></center-video>
+      <center-video :videoList="videoList" :key="item"></center-video>
       <emo-page :pageNumber="pageNumber" :pageSize="pageSize" @pageChange="pageChange"></emo-page>
     </div>
   </div>
@@ -36,6 +36,7 @@ export default {
       pageNumber: 0 ,
       pageSize: 5,
       page: 1,
+      item: 0,
     };
   },
   created() {
@@ -56,9 +57,10 @@ export default {
         params: Params,
       })
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           this.videoList = res.data.data.message.data.message;
           this.pageNumber = res.data.data.message.data.messageNumber;
+          this.item++;
         })
         .catch((err) => {
           console.log(err);

@@ -2,8 +2,9 @@
 <template>
   <div class="index-carousel">
     <el-carousel height="340px">
-      <el-carousel-item v-for="item in 4" :key="item">
-        <h3 class="small">{{ item }}</h3>
+      <el-carousel-item v-for="(item , index) in imgList" :key="index">
+        <img :src="imgPath(item.img_path)" alt="" class="carousel-img">
+        <span class="small">{{ item.name }}</span>
       </el-carousel-item>
     </el-carousel>
   </div>
@@ -12,6 +13,28 @@
 <script>
 export default {
   name: "indexCarousel",
+  data(){
+    return {
+      imgList: []
+    }
+  },
+  created(){
+    this.$axios({
+      url: "/walking",
+      method: "GET",
+    }).then(res => {
+      if(res.data.state == 200){
+        this.imgList = res.data.data.message;
+      }
+    })
+  },
+  computed:{
+    imgPath() {
+      return function (path) {
+        return this.$store.state.image_base + "/" + path;
+      };
+    },
+  }
 };
 </script>
 
@@ -42,5 +65,9 @@ export default {
 
 .el-carousel__item:nth-child(2n + 1) {
   background-color: #d3dce6;
+}
+.carousel-img{
+  width: 100%;
+  height: 300px;
 }
 </style>

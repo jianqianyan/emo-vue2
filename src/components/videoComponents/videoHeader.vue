@@ -100,7 +100,7 @@ export default {
               })
               .then((res) => {
                   if(res.data.state == 200){
-                      this.up_photo = this.$store.state.photo_base + '/' + res.data.data.message.img_path;
+                      this.up_photo = this.$store.state.image_base + '/' + res.data.data.message.img_path;
                       this.user_message = res.data.data.message;
                   }
                   else{

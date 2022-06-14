@@ -128,14 +128,6 @@ export default {
       formdata.append("img", e.target.files[0]);
       this.videoFile = formdata;
       this.isupVideo = 1;
-      let config = {
-        onUploadProgress: (progress) => {
-          this.progress =
-            Math.floor((progress.loaded / progress.total) * 100) + "%";
-          console.log(1);
-          this.$forceUpdate();
-        },
-      };
       this.$axios({
         url: "/updata",
         method: "POST",

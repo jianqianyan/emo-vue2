@@ -31,7 +31,7 @@ export default {
 
 <style scoped>
 .my-nav {
-  height: 40px;
+  height: 50px;
   width: 100%;
   
   display: flex;

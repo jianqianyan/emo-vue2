@@ -31,19 +31,19 @@ export default {
       menuList: [
         {
           name: "1",
-          link: "",
+          link: "1",
         },
         {
-          name: "1",
-          link: "",
+          name: "2",
+          link: "2",
         },
         {
-          name: "1",
-          link: "",
+          name: "3",
+          link: "3",
         },
         {
-          name: "1",
-          link: "",
+          name: "4",
+          link: "4",
         },
         {
           name: "1",
@@ -80,8 +80,8 @@ export default {
     // 跳转到对应的分区
     turnPartition(link) {
       this.$router.push({
-        path: "/partition",
-        query: { partition: link },
+        path: "/search",
+        query: { type: link },
       });
     },
   },

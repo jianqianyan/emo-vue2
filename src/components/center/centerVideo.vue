@@ -17,6 +17,10 @@ export default {
     },
     components:{
         videoBox
+    },
+    watch:{
+        videoList() {
+        }
     }
 }
 </script>

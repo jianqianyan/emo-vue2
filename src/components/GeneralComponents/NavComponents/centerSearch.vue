@@ -2,7 +2,11 @@
   <div class="center-search">
     <div class="search-body">
       <el-input :placeholder="inputText" v-model="input1">
-        <el-button slot="append" icon="el-icon-search"></el-button>
+        <el-button
+          slot="append"
+          icon="el-icon-search"
+          @click="search()"
+        ></el-button>
       </el-input>
     </div>
   </div>
@@ -16,6 +20,14 @@ export default {
       inputText: "当我获得了使用任意门的超能力",
       input1: "",
     };
+  },
+  methods: {
+    search() {
+      this.$router.push({
+        path: "/search",
+        query: { name: this.input1 },
+      });
+    },
   },
 };
 </script>
@@ -36,5 +48,4 @@ export default {
 .search-body >>> .el-input__inner {
   height: 34px;
 }
-
 </style>
